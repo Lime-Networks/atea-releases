@@ -1,6 +1,6 @@
 # ============================================================
-# Lime Networks — ATEA Installer / Updater
-# Gebruik: rechtermuisknop → "Uitvoeren met PowerShell"
+# Lime Networks - ATEA Installer / Updater
+# Gebruik: dubbelklik op updater.cmd
 # ============================================================
 
 $RepoZipUrl   = "https://raw.githubusercontent.com/Lime-Networks/atea-releases/main/extension.zip"
@@ -9,7 +9,7 @@ $TempZip      = "$env:TEMP\atea-update.zip"
 $TempExtract  = "$env:TEMP\atea-extract"
 
 Write-Host ""
-Write-Host "  Lime Networks — ATEA Installer" -ForegroundColor Green
+Write-Host "  Lime Networks - ATEA Installer" -ForegroundColor Green
 Write-Host "  ================================" -ForegroundColor DarkGray
 Write-Host ""
 
@@ -34,7 +34,7 @@ Expand-Archive -Path $TempZip -DestinationPath $TempExtract -Force
 $ExtractedFolder = Get-ChildItem $TempExtract | Where-Object { $_.PSIsContainer } | Select-Object -First 1
 $Source = if ($ExtractedFolder) { $ExtractedFolder.FullName } else { $TempExtract }
 
-# Installatiemap aanmaken en bestanden kopiëren
+# Installatiemap aanmaken en bestanden kopieren
 if (-not (Test-Path $InstallPath)) { New-Item -ItemType Directory -Path $InstallPath -Force | Out-Null }
 Copy-Item "$Source\*" -Destination $InstallPath -Recurse -Force
 
@@ -54,6 +54,5 @@ Write-Host "     $InstallPath" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "  Bij een UPDATE: klik alleen op het reload-icoontje naast de extensie." -ForegroundColor DarkGray
 Write-Host ""
-
 
 Read-Host "  Druk op Enter om te sluiten"

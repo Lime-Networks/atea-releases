@@ -1,4 +1,4 @@
 {
-  "version": "2.3",
-  "notes": "Remove Chrome open prompt from updater to prevent script hang"
+  "version": "2.4",
+  "notes": "Rewrite updater.ps1 with clean ASCII encoding to fix smart quote parse error"
 }
