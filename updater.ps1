@@ -55,13 +55,5 @@ Write-Host ""
 Write-Host "  Bij een UPDATE: klik alleen op het reload-icoontje naast de extensie." -ForegroundColor DarkGray
 Write-Host ""
 
-# Chrome openen op de extensions pagina
-$OpenChrome = Read-Host "  Chrome extensions pagina openen? (j/n)"
-if ($OpenChrome -eq "j" -or $OpenChrome -eq "J") {
-    Start-Process "chrome" "--new-tab chrome://extensions" -ErrorAction SilentlyContinue
-    if ($LASTEXITCODE -ne 0) {
-        Start-Process "msedge" "--new-tab edge://extensions" -ErrorAction SilentlyContinue
-    }
-}
 
 Read-Host "  Druk op Enter om te sluiten"
