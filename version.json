@@ -1,4 +1,4 @@
 {
-  "version": "2.6",
-  "notes": "Add logging to native messaging host"
+  "version": "2.7",
+  "notes": "Move update UI to settings tab with manual version check button"
 }
