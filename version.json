@@ -1,4 +1,4 @@
 {
-  "version": "2.1",
-  "notes": "Add updater.cmd launcher and fix PS1 string parse error"
+  "version": "2.2",
+  "notes": "Fix updater.cmd: unblock PS1 before execution to handle Mark of the Web"
 }
