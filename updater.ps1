@@ -42,6 +42,24 @@ Copy-Item "$Source\*" -Destination $InstallPath -Recurse -Force
 Remove-Item $TempZip -Force -ErrorAction SilentlyContinue
 Remove-Item $TempExtract -Recurse -Force -ErrorAction SilentlyContinue
 
+# Native messaging host registreren
+Write-Host "  Native messaging host registreren..." -ForegroundColor Cyan
+$HostManifestPath = "$InstallPath\com.limenetworks.atea.json"
+$HostCmdPath      = "$InstallPath\atea-host.cmd"
+
+$hostManifest = [ordered]@{
+    name            = "com.limenetworks.atea"
+    description     = "ATEA Update Host"
+    path            = $HostCmdPath
+    type            = "stdio"
+    allowed_origins = @("chrome-extension://olicheogjpiolepcgebnmeofppbffjod/")
+}
+$hostManifest | ConvertTo-Json | Set-Content -Path $HostManifestPath -Encoding UTF8
+
+$regPath = "HKCU:\Software\Google\Chrome\NativeMessagingHosts\com.limenetworks.atea"
+New-Item -Path $regPath -Force | Out-Null
+Set-ItemProperty -Path $regPath -Name "(Default)" -Value $HostManifestPath
+
 Write-Host ""
 Write-Host "  Klaar! Extensie staat in:" -ForegroundColor Green
 Write-Host "  $InstallPath" -ForegroundColor White
@@ -52,7 +70,7 @@ Write-Host "  2. Schakel 'Ontwikkelaarsmodus' in (rechtsboven)" -ForegroundColor
 Write-Host "  3. Klik 'Niet-ingepakte extensie laden' en selecteer:" -ForegroundColor White
 Write-Host "     $InstallPath" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "  Bij een UPDATE: klik alleen op het reload-icoontje naast de extensie." -ForegroundColor DarkGray
+Write-Host "  Updates verlopen voortaan automatisch via de extensie zelf." -ForegroundColor DarkGray
 Write-Host ""
 
 Read-Host "  Druk op Enter om te sluiten"

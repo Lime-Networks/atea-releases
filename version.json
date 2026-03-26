@@ -1,4 +1,4 @@
 {
-  "version": "2.4",
-  "notes": "Rewrite updater.ps1 with clean ASCII encoding to fix smart quote parse error"
+  "version": "2.5",
+  "notes": "Add native messaging host for automatic in-extension updates"
 }
