@@ -2,6 +2,10 @@
 # Ontvangt update-verzoeken van de Chrome extensie en installeert de nieuwe versie.
 
 $ErrorActionPreference = 'SilentlyContinue'
+$LogFile = "$env:LOCALAPPDATA\LimeNetworks\ATEA\atea-host.log"
+function Write-Log($msg) {
+    "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $msg" | Add-Content -Path $LogFile -Encoding UTF8
+}
 $stdout = [System.Console]::OpenStandardOutput()
 $stdin  = [System.Console]::OpenStandardInput()
 
@@ -34,7 +38,10 @@ function Send-Response($obj) {
     $stdout.Flush()
 }
 
+Write-Log "Host gestart, actie: $($msg.action)"
+
 if ($msg.action -eq "ping") {
+    Write-Log "Ping ontvangen"
     Send-Response @{ success = $true; status = "ok" }
     exit 0
 }
@@ -46,11 +53,14 @@ if ($msg.action -eq "update") {
     $ZipUrl       = "https://raw.githubusercontent.com/Lime-Networks/atea-releases/main/extension.zip"
 
     try {
+        Write-Log "Downloaden van $ZipUrl"
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         Invoke-WebRequest -Uri $ZipUrl -OutFile $TempZip -UseBasicParsing
+        Write-Log "Download klaar"
 
         if (Test-Path $TempExtract) { Remove-Item $TempExtract -Recurse -Force }
         Expand-Archive -Path $TempZip -DestinationPath $TempExtract -Force
+        Write-Log "Uitgepakt"
 
         $folder = Get-ChildItem $TempExtract | Where-Object { $_.PSIsContainer } | Select-Object -First 1
         $source = if ($folder) { $folder.FullName } else { $TempExtract }
@@ -59,11 +69,14 @@ if ($msg.action -eq "update") {
         Remove-Item $TempZip      -Force -ErrorAction SilentlyContinue
         Remove-Item $TempExtract  -Recurse -Force -ErrorAction SilentlyContinue
 
+        Write-Log "Update succesvol geinstalleerd"
         Send-Response @{ success = $true }
     } catch {
+        Write-Log "FOUT: $($_.Exception.Message)"
         Send-Response @{ success = $false; error = $_.Exception.Message }
     }
     exit 0
 }
 
+Write-Log "Onbekende actie: $($msg.action)"
 Send-Response @{ success = $false; error = "Onbekende actie: $($msg.action)" }

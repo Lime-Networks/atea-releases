@@ -1,4 +1,4 @@
 {
-  "version": "2.5",
-  "notes": "Add native messaging host for automatic in-extension updates"
+  "version": "2.6",
+  "notes": "Add logging to native messaging host"
 }
