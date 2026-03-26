@@ -1,4 +1,4 @@
 {
-  "version": "2.7",
-  "notes": "Move update UI to settings tab with manual version check button"
+  "version": "2.8",
+  "notes": "- release.yml: also bump manifest.json version on release"
 }
