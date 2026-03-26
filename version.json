@@ -1,4 +1,4 @@
 {
-  "version": "2.0.3",
-  "notes": "Initial release"
+  "version": "2.1",
+  "notes": "Add updater.cmd launcher and fix PS1 string parse error"
 }
