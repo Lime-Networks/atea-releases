@@ -1,4 +1,4 @@
 {
-  "version": "2.10.4",
-  "notes": "- Prompt: derde persoon, geen ik/wij, puur probleemomschrijving"
+  "version": "2.10.5",
+  "notes": "Zoekt de Title input door DOM-order terug te lopen vanuit de"
 }
