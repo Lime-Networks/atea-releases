@@ -1,4 +1,4 @@
 {
-  "version": "2.10.5",
-  "notes": "Zoekt de Title input door DOM-order terug te lopen vanuit de"
+  "version": "2.10.6",
+  "notes": "- findTitleInput() now searches for <textarea maxlength="255"> (AdjustingTextBox2)"
 }
