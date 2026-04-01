@@ -1,4 +1,4 @@
 {
-  "version": "2.9.1",
-  "notes": "Robuustere DOM-traversal voor injectActivityToolbarButtons:"
+  "version": "2.9.2",
+  "notes": "- Knoppen rechts uitgelijnd via margin-left:auto"
 }
