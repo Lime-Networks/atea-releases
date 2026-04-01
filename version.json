@@ -1,4 +1,4 @@
 {
-  "version": "2.9",
-  "notes": "Voegt polish- en samenvattingsknoppen toe aan de hoofdtoolbalk"
+  "version": "2.9.1",
+  "notes": "Robuustere DOM-traversal voor injectActivityToolbarButtons:"
 }
