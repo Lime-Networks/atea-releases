@@ -1,4 +1,4 @@
 {
-  "version": "2.10.3",
-  "notes": "- callAIForTicketDescription: probleemomschrijving vanuit gebruiker,"
+  "version": "2.10.4",
+  "notes": "- Prompt: derde persoon, geen ik/wij, puur probleemomschrijving"
 }
