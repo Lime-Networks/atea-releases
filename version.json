@@ -1,4 +1,4 @@
 {
-  "version": "2.9.6",
-  "notes": "Knop verschijnt alleen als URL TicketNew.mvc of TicketEdit.mvc bevat."
+  "version": "2.9.7",
+  "notes": "findTitleInput controleert nu innerText ipv textContent en"
 }
