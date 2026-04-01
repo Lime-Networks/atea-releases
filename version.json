@@ -1,4 +1,4 @@
 {
-  "version": "2.10.7",
-  "notes": "- Toont nu de echte foutcode (bijv. HTTP 404, of exception message)"
+  "version": "2.10.8",
+  "notes": "Bugs:"
 }
