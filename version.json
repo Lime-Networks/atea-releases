@@ -1,4 +1,4 @@
 {
-  "version": "2.9.3",
-  "notes": "- generateAndFillSummary gebruikt nu focus-tracker als fallback"
+  "version": "2.9.4",
+  "notes": "Injecteert een polijstknop naast het Description label op de"
 }
