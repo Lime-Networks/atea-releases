@@ -1,4 +1,4 @@
 {
-  "version": "2.8",
-  "notes": "- release.yml: also bump manifest.json version on release"
+  "version": "2.9",
+  "notes": "Voegt polish- en samenvattingsknoppen toe aan de hoofdtoolbalk"
 }
