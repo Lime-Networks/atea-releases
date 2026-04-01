@@ -1,4 +1,4 @@
 {
-  "version": "2.9.2",
-  "notes": "- Knoppen rechts uitgelijnd via margin-left:auto"
+  "version": "2.9.3",
+  "notes": "- generateAndFillSummary gebruikt nu focus-tracker als fallback"
 }
