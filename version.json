@@ -1,4 +1,4 @@
 {
-  "version": "2.10.2",
-  "notes": "Altijd-aan en niet-beschikbaar cellen tonen nu een uitgegrayde"
+  "version": "2.10.3",
+  "notes": "- callAIForTicketDescription: probleemomschrijving vanuit gebruiker,"
 }
