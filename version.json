@@ -1,4 +1,4 @@
 {
-  "version": "2.10.6",
-  "notes": "- findTitleInput() now searches for <textarea maxlength="255"> (AdjustingTextBox2)"
+  "version": "2.10.7",
+  "notes": "- Toont nu de echte foutcode (bijv. HTTP 404, of exception message)"
 }
