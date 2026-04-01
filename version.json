@@ -1,4 +1,4 @@
 {
-  "version": "2.9.7",
-  "notes": "findTitleInput controleert nu innerText ipv textContent en"
+  "version": "2.10",
+  "notes": "- insertSnippet plakt direct in actief veld (Summary Notes,"
 }
