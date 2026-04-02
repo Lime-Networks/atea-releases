@@ -1,4 +1,4 @@
 {
-  "version": "2.10.10",
-  "notes": "Race condition: als gebruiker direct een time entry opende op een gesloten"
+  "version": "2.10.11",
+  "notes": "Root cause: ticketAlreadyComplete werd pas gezet door het interval als het"
 }
