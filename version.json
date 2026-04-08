@@ -1,4 +1,4 @@
 {
   "version": "2.10.11",
-  "notes": "Root cause: ticketAlreadyComplete werd pas gezet door het interval als het"
+  "notes": "- getTicketContext() leest nu ook de ticket description uit"
 }
