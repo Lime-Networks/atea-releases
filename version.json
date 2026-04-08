@@ -1,4 +1,4 @@
 {
-  "version": "2.10.11",
-  "notes": "- getTicketContext() leest nu ook de ticket description uit"
+  "version": "2.10.12",
+  "notes": "Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
 }
