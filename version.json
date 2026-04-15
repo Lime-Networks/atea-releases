@@ -1,4 +1,4 @@
 {
-  "version": "2.11.2",
-  "notes": "Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+  "version": "2.11.3",
+  "notes": "AI behoudt altijd de taal van de input (geen detectie-logica meer nodig)."
 }
