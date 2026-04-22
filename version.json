@@ -1,4 +1,4 @@
 {
-  "version": "2.11.3",
-  "notes": "AI behoudt altijd de taal van de input (geen detectie-logica meer nodig)."
+  "version": "2.11.4",
+  "notes": "- content.ai.js + popup.js: stijlprompts bevatten niet langer alleen Nederlandse voorbeelden; output-taal volgt nu betrouwbaar de input-taal (Engels blijft Engels)."
 }
