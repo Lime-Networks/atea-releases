@@ -1,4 +1,4 @@
 {
-  "version": "2.11.5",
-  "notes": "- extractTicketDescription() probeert 3 strategieen incl. iframes"
+  "version": "2.11.6",
+  "notes": "Strip alleen subnodes met Internal class i.p.v. de hele entry overslaan."
 }
