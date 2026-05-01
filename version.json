@@ -1,4 +1,4 @@
 {
-  "version": "2.11.4",
-  "notes": "- content.ai.js + popup.js: stijlprompts bevatten niet langer alleen Nederlandse voorbeelden; output-taal volgt nu betrouwbaar de input-taal (Engels blijft Engels)."
+  "version": "2.11.5",
+  "notes": "- extractTicketDescription() probeert 3 strategieen incl. iframes"
 }
