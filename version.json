@@ -1,4 +1,4 @@
 {
-  "version": "2.11.6",
-  "notes": "Strip alleen subnodes met Internal class i.p.v. de hele entry overslaan."
+  "version": "2.12.0",
+  "notes": "- injectSummaryButton vindt nu ook 'Description' label in New Ticket Note modal"
 }
