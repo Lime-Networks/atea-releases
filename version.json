@@ -1,4 +1,4 @@
 {
-  "version": "2.12.1",
-  "notes": "Centrale resolveOutputLang() bepaalt de output-taal voor elke AI-call"
+  "version": "2.13.0",
+  "notes": "HIGH:"
 }

@@ -51,12 +51,27 @@ if ($msg.action -eq "update") {
     $TempZip      = "$env:TEMP\atea-update.zip"
     $TempExtract  = "$env:TEMP\atea-extract"
     $ZipUrl       = "https://raw.githubusercontent.com/Lime-Networks/atea-releases/main/extension.zip"
+    $HashUrl      = "https://raw.githubusercontent.com/Lime-Networks/atea-releases/main/extension.sha256"
 
     try {
         Write-Log "Downloaden van $ZipUrl"
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         Invoke-WebRequest -Uri $ZipUrl -OutFile $TempZip -UseBasicParsing
         Write-Log "Download klaar"
+
+        # Integriteitscontrole: SHA-256 van zip moet matchen met de gepubliceerde hash.
+        # Beschermt tegen MITM en (gedeeltelijk) tegen compromise van het releases-kanaal.
+        Write-Log "SHA-256 ophalen van $HashUrl"
+        $expectedHash = (Invoke-WebRequest -Uri $HashUrl -UseBasicParsing).Content.Trim().ToLower()
+        if ($expectedHash -notmatch '^[0-9a-f]{64}$') {
+            throw "Ongeldige hash ontvangen ($expectedHash) — update afgebroken."
+        }
+        $actualHash = (Get-FileHash -Path $TempZip -Algorithm SHA256).Hash.ToLower()
+        if ($actualHash -ne $expectedHash) {
+            Remove-Item $TempZip -Force -ErrorAction SilentlyContinue
+            throw "SHA-256 mismatch! Verwacht: $expectedHash · Werkelijk: $actualHash — update afgebroken."
+        }
+        Write-Log "SHA-256 geverifieerd: $actualHash"
 
         if (Test-Path $TempExtract) { Remove-Item $TempExtract -Recurse -Force }
         Expand-Archive -Path $TempZip -DestinationPath $TempExtract -Force
