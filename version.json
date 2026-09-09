@@ -1,4 +1,4 @@
 {
-  "version": "2.13.1",
-  "notes": "isAutotaskUrl() werd alleen in de tabs.onUpdated-handler gebruikt. De sneltoets-"
+  "version": "2.13.2",
+  "notes": "Zie de releases pagina voor wijzigingen."
 }
