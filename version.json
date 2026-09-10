@@ -1,4 +1,4 @@
 {
-  "version": "2.13.3",
-  "notes": "Mislukte updates tonen nu de oorzaak. Installer registreert ook Edge en faalt niet meer stil."
+  "version": "2.13.4",
+  "notes": "Append to Resolution wordt niet meer aangevinkt door langs Complete te scrollen; dat gebeurt nu alleen als Complete daadwerkelijk gekozen is."
 }
