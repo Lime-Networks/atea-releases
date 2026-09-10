@@ -1,4 +1,4 @@
 {
-  "version": "2.13.5",
-  "notes": "Herstelt het automatisch aanvinken van Append to Resolution, dat sinds 2.13.4 uitbleef."
+  "version": "2.13.6",
+  "notes": "Herstelt het automatisch aanvinken van Append to Resolution; de statuskolom van andere tickets blokkeerde het."
 }
