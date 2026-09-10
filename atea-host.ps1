@@ -64,12 +64,12 @@ if ($msg.action -eq "update") {
         Write-Log "SHA-256 ophalen van $HashUrl"
         $expectedHash = (Invoke-WebRequest -Uri $HashUrl -UseBasicParsing).Content.Trim().ToLower()
         if ($expectedHash -notmatch '^[0-9a-f]{64}$') {
-            throw "Ongeldige hash ontvangen ($expectedHash) — update afgebroken."
+            throw "Ongeldige hash ontvangen ($expectedHash) - update afgebroken."
         }
         $actualHash = (Get-FileHash -Path $TempZip -Algorithm SHA256).Hash.ToLower()
         if ($actualHash -ne $expectedHash) {
             Remove-Item $TempZip -Force -ErrorAction SilentlyContinue
-            throw "SHA-256 mismatch! Verwacht: $expectedHash · Werkelijk: $actualHash — update afgebroken."
+            throw "SHA-256 mismatch! Verwacht: $expectedHash / Werkelijk: $actualHash - update afgebroken."
         }
         Write-Log "SHA-256 geverifieerd: $actualHash"
 

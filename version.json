@@ -1,4 +1,4 @@
 {
-  "version": "2.13.2",
-  "notes": "Zie de releases pagina voor wijzigingen."
+  "version": "2.13.3",
+  "notes": "Mislukte updates tonen nu de oorzaak. Installer registreert ook Edge en faalt niet meer stil."
 }

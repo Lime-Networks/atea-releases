@@ -25,18 +25,46 @@ try {
     exit 1
 }
 
-# Uitpakken
+# Uitpakken en installeren
+# LET OP: uitpakken en kopieren stonden hier zonder foutafhandeling, terwijl het script
+# onderaan onvoorwaardelijk "Klaar!" printte. Een mislukte Copy-Item (bijvoorbeeld omdat
+# de browser de extensie uit deze map geladen heeft en bestanden vasthoudt) scrollde dan
+# als rode tekst voorbij en de gebruiker concludeerde dat de update gelukt was.
 Write-Host "  Uitpakken..." -ForegroundColor Cyan
-if (Test-Path $TempExtract) { Remove-Item $TempExtract -Recurse -Force }
-Expand-Archive -Path $TempZip -DestinationPath $TempExtract -Force
+try {
+    if (Test-Path $TempExtract) { Remove-Item $TempExtract -Recurse -Force -ErrorAction Stop }
+    Expand-Archive -Path $TempZip -DestinationPath $TempExtract -Force -ErrorAction Stop
 
-# Bronmap bepalen (GitHub zip heeft een submap)
-$ExtractedFolder = Get-ChildItem $TempExtract | Where-Object { $_.PSIsContainer } | Select-Object -First 1
-$Source = if ($ExtractedFolder) { $ExtractedFolder.FullName } else { $TempExtract }
+    # Bronmap bepalen (een GitHub-source-zip heeft een submap, extension.zip niet)
+    $ExtractedFolder = Get-ChildItem $TempExtract | Where-Object { $_.PSIsContainer } | Select-Object -First 1
+    $Source = if ($ExtractedFolder) { $ExtractedFolder.FullName } else { $TempExtract }
 
-# Installatiemap aanmaken en bestanden kopieren
-if (-not (Test-Path $InstallPath)) { New-Item -ItemType Directory -Path $InstallPath -Force | Out-Null }
-Copy-Item "$Source\*" -Destination $InstallPath -Recurse -Force
+    if (-not (Test-Path "$Source\manifest.json")) {
+        throw "Uitgepakte map bevat geen manifest.json - onverwachte zip-inhoud."
+    }
+    $NewVersion = ((Get-Content "$Source\manifest.json" -Raw) | Select-String '"version":\s*"([^"]+)"').Matches[0].Groups[1].Value
+
+    Write-Host "  Installeren van v$NewVersion..." -ForegroundColor Cyan
+    if (-not (Test-Path $InstallPath)) { New-Item -ItemType Directory -Path $InstallPath -Force -ErrorAction Stop | Out-Null }
+    Copy-Item "$Source\*" -Destination $InstallPath -Recurse -Force -ErrorAction Stop
+
+    # Verifieer dat het kopieren echt effect had; anders is "Klaar!" misleidend.
+    $Installed = ((Get-Content "$InstallPath\manifest.json" -Raw) | Select-String '"version":\s*"([^"]+)"').Matches[0].Groups[1].Value
+    if ($Installed -ne $NewVersion) {
+        throw "Installatie niet doorgevoerd: map staat op v$Installed, verwacht v$NewVersion. Sluit de browser volledig en probeer opnieuw."
+    }
+    Write-Host "  Geverifieerd: v$Installed geinstalleerd." -ForegroundColor Green
+} catch {
+    Write-Host ""
+    Write-Host "  FOUT: installeren mislukt." -ForegroundColor Red
+    Write-Host "  $($_.Exception.Message)" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  Meestal komt dit doordat de browser de extensie nog geopend heeft." -ForegroundColor DarkGray
+    Write-Host "  Sluit Chrome/Edge volledig af en voer updater.cmd opnieuw uit." -ForegroundColor DarkGray
+    Write-Host ""
+    Read-Host "  Druk op Enter om te sluiten"
+    exit 1
+}
 
 # Tijdelijke bestanden opruimen
 Remove-Item $TempZip -Force -ErrorAction SilentlyContinue
@@ -56,9 +84,22 @@ $hostManifest = [ordered]@{
 }
 $hostManifest | ConvertTo-Json | Set-Content -Path $HostManifestPath -Encoding UTF8
 
-$regPath = "HKCU:\Software\Google\Chrome\NativeMessagingHosts\com.limenetworks.atea"
-New-Item -Path $regPath -Force | Out-Null
-Set-ItemProperty -Path $regPath -Name "(Default)" -Value $HostManifestPath
+# Chrome EN Edge registreren. Edge leest een eigen registry-pad; stond dat er niet, dan
+# faalde "Bijwerken" in de popup stil op Edge met "host not found" terwijl README Edge
+# als ondersteund noemt.
+foreach ($regPath in @(
+    "HKCU:\Software\Google\Chrome\NativeMessagingHosts\com.limenetworks.atea",
+    "HKCU:\Software\Microsoft\Edge\NativeMessagingHosts\com.limenetworks.atea"
+)) {
+    try {
+        New-Item -Path $regPath -Force -ErrorAction Stop | Out-Null
+        Set-ItemProperty -Path $regPath -Name "(Default)" -Value $HostManifestPath -ErrorAction Stop
+        Write-Host "    geregistreerd: $($regPath -replace '^HKCU:\\Software\\','')" -ForegroundColor DarkGray
+    } catch {
+        Write-Host "    WAARSCHUWING: registreren mislukt voor $regPath" -ForegroundColor Yellow
+        Write-Host "    $($_.Exception.Message)" -ForegroundColor DarkGray
+    }
+}
 
 Write-Host ""
 Write-Host "  Klaar! Extensie staat in:" -ForegroundColor Green
