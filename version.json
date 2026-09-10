@@ -1,4 +1,4 @@
 {
-  "version": "2.13.8",
-  "notes": "Op een ticket dat al Complete is blijft Append to Resolution nu uit; het vinkje gaat alleen aan als je Complete zelf uit de statuslijst kiest."
+  "version": "2.13.9",
+  "notes": "macOS wordt nu volledig ondersteund: installeren en bijwerken werken daar net als op Windows."
 }
