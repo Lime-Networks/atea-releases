@@ -1,4 +1,4 @@
 {
-  "version": "2.13.6",
-  "notes": "Herstelt het automatisch aanvinken van Append to Resolution; de statuskolom van andere tickets blokkeerde het."
+  "version": "2.13.7",
+  "notes": "Append to Resolution wordt nu alleen aangevinkt als Complete echt gekozen is, en niet meer bij het doorscrollen van de statuslijst."
 }
