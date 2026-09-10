@@ -1,4 +1,4 @@
 {
-  "version": "2.13.7",
-  "notes": "Append to Resolution wordt nu alleen aangevinkt als Complete echt gekozen is, en niet meer bij het doorscrollen van de statuslijst."
+  "version": "2.13.8",
+  "notes": "Op een ticket dat al Complete is blijft Append to Resolution nu uit; het vinkje gaat alleen aan als je Complete zelf uit de statuslijst kiest."
 }
