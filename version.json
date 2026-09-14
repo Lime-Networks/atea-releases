@@ -1,4 +1,4 @@
 {
-  "version": "2.14.0",
-  "notes": "De oplossingendatabase en de Script-tab zijn verwijderd. Opgeslagen gegevens van die functies worden bij het bijwerken automatisch opgeruimd."
+  "version": "2.14.1",
+  "notes": "Ticketinhoud wordt nu afgebakend meegestuurd naar de AI, zodat tekst van klanten niet als instructie kan worden opgevat."
 }
