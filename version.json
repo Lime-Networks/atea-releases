@@ -1,4 +1,4 @@
 {
-  "version": "2.13.9",
-  "notes": "macOS wordt nu volledig ondersteund: installeren en bijwerken werken daar net als op Windows."
+  "version": "2.14.0",
+  "notes": "De oplossingendatabase en de Script-tab zijn verwijderd. Opgeslagen gegevens van die functies worden bij het bijwerken automatisch opgeruimd."
 }
