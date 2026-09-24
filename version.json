@@ -1,4 +1,4 @@
 {
-  "version": "2.15.0",
-  "notes": "Nieuw: de oplossing van een ticket documenteren in ITGlue, bij de klant of bij Lime als algemene kennis. Werkt pas na het instellen van de ITGlue-webhook in de instellingen. Polijsten waarschuwt nu oo"
+  "version": "2.16.0",
+  "notes": "Nieuw: met de zoekknop passende documentatie uit ITGlue bij een ticket vinden. Bij documenteren staat de klantnaam niet meer in de titel. Zoeken werkt pas na het instellen van de zoek-URL."
 }
