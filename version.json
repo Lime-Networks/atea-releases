@@ -1,4 +1,4 @@
 {
-  "version": "2.14.1",
-  "notes": "Ticketinhoud wordt nu afgebakend meegestuurd naar de AI, zodat tekst van klanten niet als instructie kan worden opgevat."
+  "version": "2.15.0",
+  "notes": "Nieuw: de oplossing van een ticket documenteren in ITGlue, bij de klant of bij Lime als algemene kennis. Werkt pas na het instellen van de ITGlue-webhook in de instellingen. Polijsten waarschuwt nu oo"
 }
