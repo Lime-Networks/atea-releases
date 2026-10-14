@@ -1,4 +1,4 @@
 {
-  "version": "2.16.0",
-  "notes": "Nieuw: met de zoekknop passende documentatie uit ITGlue bij een ticket vinden. Bij documenteren staat de klantnaam niet meer in de titel. Zoeken werkt pas na het instellen van de zoek-URL."
+  "version": "2.16.1",
+  "notes": "Het AI-voorstel bij documenteren leest nu het hele ticket, ook interne notities, en schrijft beknopt in het Nederlands. Links met een token worden tegengehouden."
 }
