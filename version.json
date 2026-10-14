@@ -1,4 +1,4 @@
 {
-  "version": "2.16.1",
-  "notes": "Het AI-voorstel bij documenteren leest nu het hele ticket, ook interne notities, en schrijft beknopt in het Nederlands. Links met een token worden tegengehouden."
+  "version": "2.16.2",
+  "notes": "Zoeken in ITGlue kijkt bij Lime nu ook in de gekozen kennismappen, niet alleen in de ATEA-map."
 }
