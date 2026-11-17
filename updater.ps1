@@ -4,7 +4,8 @@
 # ============================================================
 
 $RepoZipUrl   = "https://raw.githubusercontent.com/Lime-Networks/atea-releases/main/extension.zip"
-$InstallPath  = "$env:LOCALAPPDATA\LimeNetworks\ATEA"
+$RepoHashUrl  = "https://raw.githubusercontent.com/Lime-Networks/atea-releases/main/extension.sha256"
+$InstallPath = "$env:LOCALAPPDATA\LimeNetworks\ATEA"
 $TempZip      = "$env:TEMP\atea-update.zip"
 $TempExtract  = "$env:TEMP\atea-extract"
 
@@ -21,6 +22,33 @@ try {
 } catch {
     Write-Host "  FOUT: Download mislukt. Controleer je internetverbinding." -ForegroundColor Red
     Write-Host "  $_" -ForegroundColor DarkGray
+    Read-Host "  Druk op Enter om te sluiten"
+    exit 1
+}
+
+# Integriteitscontrole, gelijk aan atea-host.ps1 en de Mac-installer. LET OP: de hash
+# komt van dezelfde host als de zip, dus dit vangt een corrupte of halve download, niet
+# een gecompromitteerd releases-kanaal (zie F1/F3 in de security review).
+Write-Host "  Integriteit controleren..." -ForegroundColor Cyan
+try {
+    $ExpectedHash = (Invoke-WebRequest -Uri $RepoHashUrl -UseBasicParsing -ErrorAction Stop).Content
+    # Bij een onbekend content-type geeft PowerShell 5.1 bytes terug in plaats van tekst.
+    if ($ExpectedHash -is [byte[]]) { $ExpectedHash = [System.Text.Encoding]::ASCII.GetString($ExpectedHash) }
+    $ExpectedHash = "$ExpectedHash".Trim().ToLower()
+    if ($ExpectedHash -notmatch '^[0-9a-f]{64}$') {
+        throw "Ongeldige hash ontvangen - installatie afgebroken."
+    }
+    $ActualHash = (Get-FileHash -Path $TempZip -Algorithm SHA256 -ErrorAction Stop).Hash.ToLower()
+    if ($ActualHash -ne $ExpectedHash) {
+        throw "SHA-256 mismatch. Verwacht: $ExpectedHash / Werkelijk: $ActualHash"
+    }
+    Write-Host "  Hash geverifieerd." -ForegroundColor DarkGray
+} catch {
+    Remove-Item $TempZip -Force -ErrorAction SilentlyContinue
+    Write-Host ""
+    Write-Host "  FOUT: integriteitscontrole mislukt - er is niets geinstalleerd." -ForegroundColor Red
+    Write-Host "  $($_.Exception.Message)" -ForegroundColor Yellow
+    Write-Host ""
     Read-Host "  Druk op Enter om te sluiten"
     exit 1
 }
